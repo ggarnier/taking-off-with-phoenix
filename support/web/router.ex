@@ -17,6 +17,7 @@ defmodule Support.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
 
     get "/", PageController, :index
   end
