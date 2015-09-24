@@ -28,6 +28,7 @@ defmodule Support.User do
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
     |> validate_confirmation(:password, message: "must match password")
+    |> encrypt_password()
   end
 
   defp encrypt_password(changeset) do
@@ -36,5 +37,13 @@ defmodule Support.User do
     else
       changeset
     end
+  end
+
+  defp hash_password(password) do
+    Comeonin.Bcrypt.hashpwsalt(password)
+  end
+
+  def check_password(password, crypted) do
+    Comeonin.Bcrypt.checkpw(password, crypted)
   end
 end
