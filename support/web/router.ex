@@ -20,6 +20,10 @@ defmodule Support.Router do
     get "/register", RegistrationController, :new
     post "/register", RegistrationController, :create
 
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/login", SessionController, :delete
+
     get "/", PageController, :index
   end
 
